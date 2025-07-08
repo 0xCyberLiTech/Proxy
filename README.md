@@ -28,6 +28,14 @@
 
 ---
 
+### 🎯 **Objectif de ce dépôt.**
+
+> Ce dépôt a pour vocation de centraliser un ensemble de notions clés autour des proxy et reverse proxy. Il s'adresse aux passionnés, étudiants et professionnels souhaitant mieux comprendre les rôles stratégiques de ces technologies dans la
+> gestion du trafic réseau, la protection des systèmes, et l’optimisation des performances.
+> On y explore la mise en place de configurations adaptées à différents scénarios, ainsi que les concepts et bonnes pratiques pour garantir la sécurité, la scalabilité et la fiabilité des infrastructures web modernes.
+
+---
+
 <h1 align="center"> 🚧 **Page en cours de développement** 🚧</h1>
 <h3 align="center"> 🔧 Travail en cours... Merci de revenir plus tard !</h3>
 
