@@ -13,7 +13,7 @@
 
 ---
 
-### 👨‍💻 **À propos de moi.**
+## 👨‍💻 **À propos de moi.**
 
 > Ce dépôt constitue mon laboratoire numérique où je consigne rigoureusement mes apprentissages et expérimentations. Passionné par l'écosystème Linux > et la cybersécurité, je
 > documente mon parcours et mes projets sur mon GitHub. Vous y trouverez des guides pratiques sur la supervision (Zabbix,
@@ -28,7 +28,7 @@
 
 ---
 
-### 🎯 **Objectif de ce dépôt.**
+## 🎯 **Objectif de ce dépôt.**
 
 > Ce dépôt a pour vocation de centraliser un ensemble de notions clés autour des proxy et reverse proxy. Il s'adresse aux passionnés, étudiants et professionnels souhaitant mieux comprendre les rôles stratégiques de ces technologies dans la
 > gestion du trafic réseau, la protection des systèmes, et l’optimisation des performances.
@@ -36,7 +36,7 @@
 
 ---
 
-# 🔐 Voici un script Bash complet pour Debian 12 qui :
+## 🔐 Voici un script Bash complet pour Debian 12 qui :
 
 - Installe Squid et les dépendances.
 - Configure Squid en proxy transparent HTTP + HTTPS (SSL Bump).
