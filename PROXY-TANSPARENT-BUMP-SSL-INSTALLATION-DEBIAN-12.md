@@ -36,12 +36,7 @@
 
 ---
 
-<h1 align="center"> 🚧 **Page en cours de développement** 🚧</h1>
-<h3 align="center"> 🔧 Travail en cours... Merci de revenir plus tard !</h3>
-
----
-
-# Installation serveur proxy bump (HTTPS / SSL) transparents
+## 🔐 Installation serveur proxy bump (HTTPS / SSL) transparents.
 
 Parfait, tu veux donc aussi intercepter le trafic HTTPS via SSL Bump. C’est plus complexe que pour le HTTP car il faut :
 
