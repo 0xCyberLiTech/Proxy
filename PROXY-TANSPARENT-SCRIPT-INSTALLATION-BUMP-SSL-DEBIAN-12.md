@@ -43,7 +43,7 @@
 - Crée un certificat CA autosigné.
 - Configure les redirections avec iptables
 
-- Créer un fichier nommé /usr/local/install_squid_transparent.sh
+A présent créer un fichier nommé install_squid_transparent.sh vers /usr/local/ :
 
 ```bash
 nano /usr/local/install_squid_transparent.sh
