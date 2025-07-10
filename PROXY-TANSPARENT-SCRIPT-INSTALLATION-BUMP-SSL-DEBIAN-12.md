@@ -34,12 +34,12 @@
 > gestion du trafic réseau, la protection des systèmes, et l’optimisation des performances.
 > On y explore la mise en place de configurations adaptées à différents scénarios, ainsi que les concepts et bonnes pratiques pour garantir la sécurité, la scalabilité et la fiabilité des infrastructures web modernes.
 
-```
+---
 
 <h1 align="center"> 🚧 **Page en cours de développement** 🚧</h1>
 <h3 align="center"> 🔧 Travail en cours... Merci de revenir plus tard !</h3>
 
-```
+---
 
 # Voici un script Bash complet pour Debian 12 qui :
 
