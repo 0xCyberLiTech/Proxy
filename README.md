@@ -36,7 +36,7 @@
 
 ---
 
-**Catégories des projets :**
+## 🗂️ **Catégories des projets :**
 
 
 | 🗂️ **Catégorie**     | 📄 **Description**                           | 🔗 **Accès rapide**                                                                                                                         |
