@@ -36,22 +36,17 @@
 
 ---
 
-<h1 align="center"> 🚧 **Page en cours de développement** 🚧</h1>
-<h3 align="center"> 🔧 Travail en cours... Merci de revenir plus tard !</h3>
-
----
-
-# Voici un tutoriel détaillé pour installer et configurer un serveur proxy Squid transparent sur Debian 12. 
+## 🔐 **Voici un tutoriel détaillé pour installer et configurer un serveur proxy Squid transparent sur Debian 12**. 
 
 Ce type de proxy intercepte automatiquement le trafic HTTP sans que les clients aient besoin de configurer manuellement leur navigateur.
 
-## 🧰 Prérequis
+## 🧰 Prérequis :
     • Un serveur Debian 12 (avec accès root ou sudo).
     • Deux interfaces réseau (idéalement) :
         ◦ eth0 connectée à Internet.
         ◦ eth1 connectée au réseau local.
 
-## 🛠 Étapes d’installation et configuration
+## 🛠 Étapes d’installation et configuration :
 
 ### 1. Mise à jour du système.
 
@@ -71,7 +66,8 @@ sudo apt install squid -y
 sudo cp /etc/squid/squid.conf /etc/squid/squid.conf.bak
 ```
 
-### 4. Configuration de Squid en mode transparent
+### 4. Configuration de Squid en mode transparent.
+
 Éditez le fichier de configuration :
 
 ```bash
