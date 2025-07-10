@@ -41,8 +41,14 @@
 
 ---
 
-<h2 align="left">💡</h2>
-<h3 align="left">👋 </h3>
+**Catégories des projets :**
+
+
+| 🗂️ **Catégorie**     | 📄 **Description**                           | 🔗 **Accès rapide**                                                                                                                         |
+|-----------------------|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| ** Tuto proxy transparent.**     | Introduction, installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-orange?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-INSTALLATION-DEBIAN-12.md) |
+| ** Tuto proxy transparent + bump (SSL).**     | Introduction, installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-orange?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md) |
+| ** Script proxy transparent + bump (SSL).**     | Introduction, installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-orange?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md) |
 
 - 
 - 
