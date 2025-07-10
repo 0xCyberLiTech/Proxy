@@ -36,7 +36,7 @@
 
 ---
 
-## 🔐 **Installer et configurer un serveur proxy Squid transparent, sur Debian 12**. 
+## 🔐 **Installer & configurer un serveur proxy Squid transparent, sur Debian 12**. 
 
 Ce type de proxy intercepte automatiquement le trafic HTTP sans que les clients aient besoin de configurer manuellement leur navigateur.
 
