@@ -41,16 +41,98 @@
 
 ---
 
-<h2 align="left">💡</h2>
-<h3 align="left">👋 </h3>
+# Voici un script Bash complet pour Debian 12 qui :
 
-- 
-- 
--
-- 
-- 
--
+- Installe Squid et les dépendances.
+- Configure Squid en proxy transparent HTTP + HTTPS (SSL Bump).
+- Crée un certificat CA autosigné.
+- Configure les redirections avec iptables
 
+Script : install_squid_transparent.sh
+-------------------------------------
+
+---bash
+nano /usr/local/install_squid_transparent.sh
+---
+
+---bash
+#!/bin/bash
+
+# === Variables à adapter ===
+LAN_IF="eth1"     # Interface réseau locale
+WAN_IF="eth0"     # Interface vers Internet
+LOCAL_NET="192.168.1.0/24"  # Réseau local
+CA_DIR="/etc/squid/ssl_cert"
+SSL_DB="/var/lib/ssl_db"
+
+echo "[+] Mise à jour du système"
+apt update && apt upgrade -y
+
+echo "[+] Installation de Squid et des outils SSL"
+apt install -y squid openssl ssl-cert iptables iptables-persistent
+
+echo "[+] Création du certificat CA"
+mkdir -p $CA_DIR
+cd $CA_DIR
+openssl genrsa -out myCA.key 4096
+openssl req -new -x509 -days 3650 -key myCA.key -out myCA.crt \
+  -subj "/C=FR/ST=France/L=Paris/O=MonProxy/CN=MonProxyCA"
+
+chown -R proxy:proxy $CA_DIR
+chmod 700 $CA_DIR
+
+echo "[+] Création de la base de certificats SSL"
+mkdir -p $SSL_DB
+/usr/lib/squid/security_file_certgen -c -s $SSL_DB -M 4MB
+chown -R proxy:proxy $SSL_DB
+
+echo "[+] Sauvegarde de la configuration Squid existante"
+cp /etc/squid/squid.conf /etc/squid/squid.conf.bak
+
+echo "[+] Écriture de la configuration Squid"
+cat > /etc/squid/squid.conf <<EOF
+http_port 3128 intercept
+https_port 3129 intercept ssl-bump cert=$CA_DIR/myCA.crt key=$CA_DIR/myCA.key generate-host-certificates=on dynamic_cert_mem_cache_size=4MB
+
+sslcrtd_program /usr/lib/squid/security_file_certgen -s $SSL_DB -M 4MB
+
+acl step1 at_step SslBump1
+ssl_bump peek step1
+ssl_bump bump all
+
+acl localnet src $LOCAL_NET
+http_access allow localnet
+http_access deny all
+EOF
+
+echo "[+] Activation du forwarding IP"
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+sysctl -p
+
+echo "[+] Configuration des règles iptables"
+iptables -F
+iptables -t nat -F
+
+# Redirection HTTP
+iptables -t nat -A PREROUTING -i $LAN_IF -p tcp --dport 80 -j REDIRECT --to-port 3128
+# Redirection HTTPS
+iptables -t nat -A PREROUTING -i $LAN_IF -p tcp --dport 443 -j REDIRECT --to-port 3129
+# NAT pour l'accès Internet
+iptables -t nat -A POSTROUTING -o $WAN_IF -j MASQUERADE
+
+echo "[+] Sauvegarde des règles iptables"
+netfilter-persistent save
+
+echo "[+] Redémarrage du service Squid"
+systemctl restart squid
+systemctl enable squid
+
+echo "[✅] Installation terminée !"
+echo "➡️  Pense à déployer le certificat CA sur les clients : $CA_DIR/myCA.crt"
+---
+
+---bash
+chmod +x /usr/local/install_squid_transparent.sh
 ---
 
 <p align="center">
