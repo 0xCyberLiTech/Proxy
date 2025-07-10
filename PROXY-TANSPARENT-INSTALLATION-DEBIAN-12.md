@@ -80,7 +80,7 @@ sudo nano /etc/squid/squid.conf
 
 Ajoutez ou modifiez les lignes suivantes :
 
-conf
+Configuration :
 
 ```bash
 # Port d'écoute en mode transparent
