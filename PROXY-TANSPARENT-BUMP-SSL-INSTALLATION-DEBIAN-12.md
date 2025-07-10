@@ -36,7 +36,7 @@
 
 ---
 
-## 🔐 Installer et configurer un serveur proxy + BUMP (HTTPS) transparents, sur Debian 12.
+## 🔐 Installer & configurer un serveur proxy Squid transparent + BUMP, sur Debian 12.
 
 Parfait, tu veux donc aussi intercepter le trafic HTTPS via SSL Bump.
 
