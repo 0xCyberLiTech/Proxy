@@ -36,7 +36,7 @@
 
 ---
 
-## 🔐 Installation serveur proxy bump (HTTPS / SSL) transparents.
+## 🔐 Installation serveur proxy bump (HTTPS / SSL) transparents, sur Debian 12.
 
 Parfait, tu veux donc aussi intercepter le trafic HTTPS via SSL Bump. C’est plus complexe que pour le HTTP car il faut :
 
