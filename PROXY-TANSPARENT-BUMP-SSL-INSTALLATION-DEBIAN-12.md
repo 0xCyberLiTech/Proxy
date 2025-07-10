@@ -46,9 +46,11 @@ C’est plus complexe que pour le HTTP car il faut :
     • Configurer Squid pour faire un man-in-the-middle contrôlé.
     • Installer le certificat CA sur les clients (navigateurs ou systèmes d’exploitation).
 
-# ⚠️ - AVERTISSEMENT IMPORTANT - ⚠️
+## ⚠️ - AVERTISSEMENT IMPORTANT - ⚠️
 
 Intercepter le HTTPS est intrusif. Cela casse la confidentialité des connexions SSL. Ne fais cela que sur un réseau que tu contrôles totalement, à des fins légitimes (ex : filtrage parental, entreprise, lab tests).
+
+## ⚠️ - AVERTISSEMENT IMPORTANT - ⚠️
 
 🛠 Étapes supplémentaires pour activer SSL Bump (HTTPS transparent)
 
