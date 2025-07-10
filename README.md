@@ -52,7 +52,7 @@
 
 ---
 
-# 🧠 Résumé pédagogique : Les différents types de serveurs proxy
+# 🧠 Les différents types de serveurs proxy
 
 Un **serveur proxy** agit comme un **intermédiaire** entre un client (navigateur, application) et Internet. Il permet de **filtrer, sécuriser, anonymiser ou contrôler** le trafic réseau. Voici les principaux types de proxy existants, avec leurs usages et caractéristiques.
 
