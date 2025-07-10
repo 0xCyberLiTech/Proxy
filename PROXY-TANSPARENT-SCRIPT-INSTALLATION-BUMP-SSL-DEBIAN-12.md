@@ -51,11 +51,11 @@
 Script : install_squid_transparent.sh
 -------------------------------------
 
-```
+```bash
 nano /usr/local/install_squid_transparent.sh
 ```
 
-```
+```bash
 #!/bin/bash
 
 # === Variables à adapter ===
@@ -131,7 +131,7 @@ echo "[✅] Installation terminée !"
 echo "➡️  Pense à déployer le certificat CA sur les clients : $CA_DIR/myCA.crt"
 ```
 
-```
+```bash
 chmod +x /usr/local/install_squid_transparent.sh
 ```
 
