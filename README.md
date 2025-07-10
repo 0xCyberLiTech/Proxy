@@ -41,9 +41,9 @@
 
 | 🗂️ **Catégorie**     | 📄 **Description**                           | 🔗 **Accès rapide**                                                                                                                         |
 |-----------------------|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| - Tuto proxy transparent.     | Introduction, installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-brightgreen?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-INSTALLATION-DEBIAN-12.md) |
-| - Tuto proxy transparent + bump (SSL).     | Introduction, installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-brightgreen?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md) |
-| - Script proxy transparent + bump (SSL).     | Introduction, installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-brightgreen?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md) |
+| - Tuto proxy transparent.     | Installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-brightgreen?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-INSTALLATION-DEBIAN-12.md) |
+| - Tuto proxy transparent + bump (SSL).     | Installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-brightgreen?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md) |
+| - Script proxy transparent + bump (SSL).     | Installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-brightgreen?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md) |
 
 ---
 
