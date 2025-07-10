@@ -1,7 +1,7 @@
 <div align="center">
 
-<a href="https://github.com/0xCyberLiTech">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=650&lines=LES+PROXIES;LES+REVERSES+PROXIES;Introduction;Fonctionnement+de+Base;Sécurité+et+Confidentialité" alt="Typing SVG" />
+<a href="https://github.com/0xCyberLiTech/Proxy/blob/main/PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=850&lines=Proxy+Squid+Transparent+avec+SSL+Bump;Inspection+HTTPS+et+Filtrage+Avancé;Installation+Automatisée+Debian+12;Redirection+du+Traffic+avec+iptables;Sécurité+et+Contrôle+du+Flux+Web" alt="Typing SVG" />
 </a>
 
 <p align="center">
