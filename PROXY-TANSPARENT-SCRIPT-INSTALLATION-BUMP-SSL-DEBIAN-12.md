@@ -36,12 +36,7 @@
 
 ---
 
-<h1 align="center"> 🚧 **Page en cours de développement** 🚧</h1>
-<h3 align="center"> 🔧 Travail en cours... Merci de revenir plus tard !</h3>
-
----
-
-# Voici un script Bash complet pour Debian 12 qui :
+# 🔐 Voici un script Bash complet pour Debian 12 qui :
 
 - Installe Squid et les dépendances.
 - Configure Squid en proxy transparent HTTP + HTTPS (SSL Bump).
