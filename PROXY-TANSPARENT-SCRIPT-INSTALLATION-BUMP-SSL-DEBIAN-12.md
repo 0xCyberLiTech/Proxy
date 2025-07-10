@@ -135,6 +135,8 @@ echo "➡️  Pense à déployer le certificat CA sur les clients : $CA_DIR/myCA
 chmod +x /usr/local/install_squid_transparent.sh
 ```
 
+---
+
 <p align="center">
   🔒 Un guide proposé par <a href="https://github.com/0xCyberLiTech">0xCyberLiTech</a> • Pour des tutoriels accessible à tous.
 </p>
