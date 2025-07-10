@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://github.com/0xCyberLiTech/Proxy/blob/main/PROXY-TANSPARENT-INSTALLATION-DEBIAN-12.md">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=750&lines=Installation+Proxy+Transparent;Debian+12+Sans+SSL+Bump;Redirection+Automatique+du+Traffic;Proxy+HTTP+Transparent;Script+Open+Source+Facile" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=800&lines=Tutoriel+Proxy+Squid+Transparent;Installation+sur+Debian+12;Configuration+Détaillée+Pas+à+Pas;Redirection+du+Traffic+HTTP;Proxy+Sans+Interception+SSL" alt="Typing SVG" />
 </a>
 
 <p align="center">
