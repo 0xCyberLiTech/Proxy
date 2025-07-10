@@ -36,7 +36,7 @@
 
 ---
 
-## 🔐 Installer et configurer un serveur proxy + BUMP (HTTPS / SSL) transparents, sur Debian 12.
+## 🔐 Installer et configurer un serveur proxy + BUMP (HTTPS) transparents, sur Debian 12.
 
 Parfait, tu veux donc aussi intercepter le trafic HTTPS via SSL Bump.
 
