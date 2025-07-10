@@ -125,6 +125,8 @@ echo "[✅] Installation terminée !"
 echo "➡️  Pense à déployer le certificat CA sur les clients : $CA_DIR/myCA.crt"
 ```
 
+Rendre exécutable ce script :
+
 ```bash
 chmod +x /usr/local/install_squid_transparent.sh
 ```
