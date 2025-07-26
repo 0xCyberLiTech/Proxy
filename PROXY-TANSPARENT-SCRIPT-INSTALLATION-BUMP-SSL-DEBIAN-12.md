@@ -140,10 +140,6 @@ chmod +x /usr/local/install_squid_transparent.sh
 
 ---
 
-**Mise à jour :** Juillet 2025
-
----
-
 <p align="center">
   <b>🔒 Un guide proposé par <a href="https://github.com/0xCyberLiTech">0xCyberLiTech</a> • Pour des tutoriels accessibles à tous. 🔒</b>
 </p>
