@@ -1,13 +1,19 @@
 <div align="center">
 
-<a href="https://github.com/0xCyberLiTech/Proxy/blob/main/PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=750&lines=Installation+Proxy+Transparent;Avec+Bump+SSL+sur+Debian+12;Script+Automatisé+Open+Source;Filtrage+HTTPS+et+HTTP;Sécurisation+et+Inspection+du+Traffic" alt="Typing SVG" />
-</a>
+  <a href="https://github.com/0xCyberLiTech/Proxy/blob/main/PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=750&lines=Installation+Proxy+Transparent;Avec+Bump+SSL+sur+Debian+12;Script+Automatisé+Open+Source;Filtrage+HTTPS+et+HTTP;Sécurisation+et+Inspection+du+Traffic" alt="Typing SVG" />
+  </a>
 
-<p align="center">
-  <em>Un dépôt pédagogique autour du proxy & reverse-proxy.</em><br>
-  <b>📘 Apprentissage – 🔐 Sécurité – 🧠 Compréhension</b>
-</p>
+  <p align="center">
+    <em>Un dépôt pédagogique autour du proxy & reverse-proxy.</em><br>
+    <b>📘 Apprentissage – 🔐 Sécurité – 🧠 Compréhension</b>
+  </p>
+
+  [![🔗 Profil GitHub](https://img.shields.io/badge/Profil-GitHub-181717?logo=github&style=flat-square)](https://github.com/0xCyberLiTech)
+  [![📦 Dernière version](https://img.shields.io/github/v/release/0xCyberLiTech/Proxy?label=version&style=flat-square&color=blue)](https://github.com/0xCyberLiTech/Proxy/releases/latest)
+  [![📄 CHANGELOG](https://img.shields.io/badge/📄%20Changelog-Proxy-blue?style=flat-square)](https://github.com/0xCyberLiTech/Proxy/blob/main/CHANGELOG.md)
+  [![📂 Dépôts publics](https://img.shields.io/badge/Dépôts-publics-blue?style=flat-square)](https://github.com/0xCyberLiTech?tab=repositories)
+  [![👥 Contributeurs](https://img.shields.io/badge/👥%20Contributeurs-cliquez%20ici-007ec6?style=flat-square)](https://github.com/0xCyberLiTech/Proxy/graphs/contributors)
 
 </div>
 
