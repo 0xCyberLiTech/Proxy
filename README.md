@@ -1,19 +1,19 @@
 <div align="center">
 
-<a href="https://github.com/0xCyberLiTech/Proxy">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=800&lines=Proxys+Squid+Transparent+et+SSL+Bump;Installation+Debian+12+pas+à+pas;Configuration+iptables+et+certificats;Filtrage+HTTP+et+HTTPS;Sécurité+et+Inspection+du+Traffic" alt="Typing SVG" />
-</a>
-
-<p align="center">
-  <em>Un dépôt pédagogique autour du proxy & reverse-proxy.</em><br>
-  <b>📘 Apprentissage – 🔐 Sécurité – 🧠 Compréhension</b>
-</p>
-
-[![🔗 Profil GitHub](https://img.shields.io/badge/Profil-GitHub-181717?logo=github&style=flat-square)](https://github.com/0xCyberLiTech)
-[![📦 Dernière version](https://img.shields.io/github/v/release/0xCyberLiTech/Proxy?label=version&style=flat-square&color=blue)](https://github.com/0xCyberLiTech/Proxy/releases/latest)
-[![📄 CHANGELOG](https://img.shields.io/badge/📄%20Changelog-Proxy-blue?style=flat-square)](https://github.com/0xCyberLiTech/Proxy/blob/main/CHANGELOG.md)
-[![📂 Dépôts publics](https://img.shields.io/badge/Dépôts-publics-blue?style=flat-square)](https://github.com/0xCyberLiTech?tab=repositories)
-[![👥 Contributeurs](https://img.shields.io/badge/👥%20Contributeurs-cliquez%20ici-007ec6?style=flat-square)](https://github.com/0xCyberLiTech/Proxy/graphs/contributors)
+  <a href="https://github.com/0xCyberLiTech/Proxy">
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=800&lines=Proxys+Squid+Transparent+et+SSL+Bump;Installation+Debian+12+pas+à+pas;Configuration+iptables+et+certificats;Filtrage+HTTP+et+HTTPS;Sécurité+et+Inspection+du+Traffic" alt="Typing SVG" />
+  </a>
+  
+  <p align="center">
+    <em>Un dépôt pédagogique autour du proxy & reverse-proxy.</em><br>
+    <b>📘 Apprentissage – 🔐 Sécurité – 🧠 Compréhension</b>
+  </p>
+  
+  [![🔗 Profil GitHub](https://img.shields.io/badge/Profil-GitHub-181717?logo=github&style=flat-square)](https://github.com/0xCyberLiTech)
+  [![📦 Dernière version](https://img.shields.io/github/v/release/0xCyberLiTech/Proxy?label=version&style=flat-square&color=blue)](https://github.com/0xCyberLiTech/Proxy/releases/latest)
+  [![📄 CHANGELOG](https://img.shields.io/badge/📄%20Changelog-Proxy-blue?style=flat-square)](https://github.com/0xCyberLiTech/Proxy/blob/main/CHANGELOG.md)
+  [![📂 Dépôts publics](https://img.shields.io/badge/Dépôts-publics-blue?style=flat-square)](https://github.com/0xCyberLiTech?tab=repositories)
+  [![👥 Contributeurs](https://img.shields.io/badge/👥%20Contributeurs-cliquez%20ici-007ec6?style=flat-square)](https://github.com/0xCyberLiTech/Proxy/graphs/contributors)
 
 </div>
 
@@ -152,10 +152,6 @@ Les serveurs proxy sont des outils puissants pour :
 - **Cacher** ou **révéler** l’identité réseau selon les besoins
 
 👉 Le choix du type de proxy dépend de l’objectif : **sécurité, anonymat, performance ou contrôle**.
-
----
-
-**Mise à jour :** Juillet 2025
 
 ---
 
