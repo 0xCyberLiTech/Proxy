@@ -1,8 +1,10 @@
 <div align="center">
 
-  <a href="https://github.com/0xCyberLiTech/Proxy/blob/main/PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md">
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&pause=1000&color=D14A4A&center=true&vCenter=true&width=850&lines=Proxy+Squid+Transparent+avec+SSL+Bump;Inspection+HTTPS+et+Filtrage+Avancé;Installation+Automatisée+Debian+12;Redirection+du+Traffic+avec+iptables;Sécurité+et+Contrôle+du+Flux+Web" alt="Typing SVG" />
+  <br></br>
+  <a href="https://github.com/0xCyberLiTech">
+    <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=50&duration=6000&pause=1000000000&color=FF0048&center=true&vCenter=true&width=1100&lines=%3EPROXY_" alt="Titre dynamique PROXY" />
   </a>
+  <br></br>
 
   <p align="center">
     <em>Un dépôt pédagogique autour du proxy & reverse-proxy.</em><br>
