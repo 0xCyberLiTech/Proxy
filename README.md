@@ -37,7 +37,6 @@
 </div>
 
 ---
----
 
 ## 🚀 À propos & Objectifs
 
