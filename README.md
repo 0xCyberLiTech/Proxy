@@ -65,7 +65,7 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 ### 🗂️ **Catégories des projets :**
 
 
-| 🗂️ **Catégorie**     | 📄 **Description**                           | 🔗 **Accès rapide**                                                                                                                         |
+| **Catégorie**     | **Description**                           | **Accès rapide**                                                                                                                         |
 |-----------------------|----------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | - Tuto proxy transparent.     | Installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-INSTALLATION-DEBIAN-12.md) |
 | - Tuto proxy transparent + BUMP (SSL).     | Installation & configuration   | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md) |
