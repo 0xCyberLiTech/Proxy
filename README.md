@@ -34,7 +34,7 @@
 </div>
 
 <!--
-Optimisation SEO : astuces, cybersécurité, Linux, sécurité informatique, tutoriels, guides, administration système, scripts Bash, Debian, proxy, reverse proxy, log, ressources techniques, étudiants, professionnels, formation, réseau, IT, bonnes pratiques, passionnés.
+Optimisation SEO : 0xCyberLiTech, astuces, cybersécurité, Linux, sécurité informatique, tutoriels, guides, administration système, scripts Bash, Debian, proxy, reverse proxy, log, ressources techniques, étudiants, professionnels, formation, réseau, IT, bonnes pratiques, passionnés.
 -->
 
 <div align="center">
