@@ -58,14 +58,27 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 ---
 
-### 🗂️ **Catégories des projets :**
+<div align="center" style="margin-bottom: 10px;">
 
+### **Sommaire**
+
+🟢 **Actif** – Dépôt totalement accessible  
+🟠 **Partiel** – Dépôt partiellement accessible  
+🔴 **Inactif** – Dépôt inaccessible ou indisponible
+
+</div>
+
+---
+
+<div align="center">
 
 | **Catégorie**                            | **Description**              | **Accès rapide**                                                                                                                                                       |
 |------------------------------------------|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | - Tuto proxy transparent.                | Installation & configuration | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-INSTALLATION-DEBIAN-12.md)                 |
 | - Tuto proxy transparent + BUMP (SSL).   | Installation & configuration | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md)        |
 | - Script proxy transparent + BUMP (SSL). | Installation & configuration | [<img src="https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white">](PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md) |
+
+</div>
 
 ---
 
