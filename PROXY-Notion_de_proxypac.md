@@ -62,7 +62,7 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 ---
 
-# Guide Proxy PAC / WPAD (pédagogique)
+# Guide Proxy PAC / WPAD
 
 Cible : expliquer clairement ce qu'est un fichier PAC/WPAD, comment il fonctionne avec un proxy Squid, et donner des exemples concrets (wpad.dat, hébergement, WPAD DNS/DHCP, tests, sécurité).
 
