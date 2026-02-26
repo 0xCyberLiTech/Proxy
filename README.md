@@ -84,9 +84,6 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 | - Tuto NGINX                             | Sécurisation de la configuration Nginx. | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](https://github.com/0xCyberLiTech/Proxy/blob/main/NGINX_reverse_proxy_nginx_secure.md) |
 | - Tuto NGINX                             | Restriction géographique NGINX | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](https://github.com/0xCyberLiTech/Proxy/blob/main/NGINX_reverse_proxy_nginx_debian13_geoip.md) |
 | - Tuto proxy reverse NPM                 | Installation & configuration | [![Explorer](https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white)]() |
-| - Tuto proxy transparent + BUMP (SSL).   | Installation & configuration | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](PROXY-TANSPARENT-BUMP-SSL-INSTALLATION-DEBIAN-12.md) |
-| - Script proxy transparent + BUMP (SSL). | Installation & configuration | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](PROXY-TANSPARENT-SCRIPT-INSTALLATION-BUMP-SSL-DEBIAN-12.md) |
-
 </div>
 
 ---
