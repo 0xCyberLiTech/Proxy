@@ -314,8 +314,6 @@ Dépannage rapide
 - Erreur de vérification TLS côté `proxy` : vérifier que le certificat backend contient le SAN attendu et que `proxy` a bien la CA racine (Option B).
 - Si Certbot échoue : vérifier que les enregistrements DNS sont corrects et que les ports 80/443 sont accessibles pour la validation.
 
-Fin.
-
 ---
 
 <div align="center">
