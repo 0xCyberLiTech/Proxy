@@ -83,7 +83,7 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 | - Tuto NGINX                             | Chiffrement de bout en bout (TLS) depuis Proxmox | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](https://github.com/0xCyberLiTech/Proxy/blob/main/NGINX_Chiffrement_de_bout_en_bout_TLS_avec_Nginx_sur_Proxmox_Debian_13.md) |
 | - Tuto NGINX                             | Sécurisation de la configuration Nginx. | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](https://github.com/0xCyberLiTech/Proxy/blob/main/NGINX_reverse_proxy_nginx_secure.md) |
 | - Tuto NGINX                             | Restriction géographique NGINX | [![Explorer](https://img.shields.io/badge/EXPLORER-4CAF50?style=for-the-badge&logo=github&logoColor=white)](https://github.com/0xCyberLiTech/Proxy/blob/main/NGINX_reverse_proxy_nginx_debian13_geoip.md) |
-| - Tuto proxy reverse NPM                 | Installation & configuration | [![Explorer](https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white)]() |
+| - Tuto NPM                               | Installation & configuration | [![Explorer](https://img.shields.io/badge/EXPLORER-red?style=for-the-badge&logo=github&logoColor=white)]() |
 </div>
 
 ---
