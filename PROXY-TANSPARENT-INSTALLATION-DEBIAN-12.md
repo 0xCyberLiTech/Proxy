@@ -62,151 +62,137 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 ---
 
-## 🔐 **Installer & configurer un serveur proxy Squid transparent, sur Debian 12**. 
+# Procédure d'installation et d'exploitation — Squid + SquidGuard + SquidAnalyzer
 
-Ce type de proxy intercepte automatiquement le trafic HTTP sans que les clients aient besoin de configurer manuellement leur navigateur.
+But : déployer un proxy Squid sur Debian 13, ajouter le filtrage SquidGuard et générer des rapports SquidAnalyzer. Inclut scripts pour récupération automatique des bases de filtrage.
 
-## 🧰 Prérequis :
-    • Un serveur Debian 12 (avec accès root ou sudo).
-    • Deux interfaces réseau (idéalement) :
-        ◦ eth0 connectée à Internet.
-        ◦ eth1 connectée au réseau local.
+Prérequis
+- Debian 13 (amd64), accès root ou sudo.
+- Connexion internet pour `apt`.
+- Sauvegarder les fichiers de config existants avant modification.
 
-## 🛠 Étapes d’installation et configuration :
+Récapitulatif des scripts fournis (dossier `scripts/`):
+- `install_squid.sh` : installe Squid, SquidGuard, (SquidAnalyzer si disponible) et dépendances.
+- `setup_db_dirs.sh` : crée l'arborescence `/var/lib/squidguard/db`.
+- `fetch_blacklists.sh` : récupère des hosts lists publiques, les convertit en fichiers `domains` pour SquidGuard puis lance `squidGuard -C all` et recharge Squid.
+- `update_and_reload.sh` : wrapper pour rebuild DB et reload Squid.
 
-### 1. Mise à jour du système.
+Installation rapide (manuel)
+1. Mettre à jour le système :
 
 ```bash
-sudo apt update && sudo apt upgrade -y
+sudo apt update
+sudo apt upgrade -y
 ```
 
-### 2. Installation de Squid.
+2. Vérifier la disponibilité des paquets et installer :
+
+Avant d'installer, vérifiez que les paquets sont présents dans les dépôts :
 
 ```bash
-sudo apt install squid -y
+apt-cache policy squid squidguard squidanalyzer || true
 ```
 
-### 3. Sauvegarde de la configuration par défaut.
+Si `squidanalyzer` n'est pas disponible via `apt`, installez-le depuis le paquet du projet ou suivez l'installation depuis la source (voir section "Installation alternative").
+
+Installer les paquets disponibles :
 
 ```bash
-sudo cp /etc/squid/squid.conf /etc/squid/squid.conf.bak
+sudo apt install -y squid squidguard apache2-utils nftables wget tar bzip2
 ```
 
-### 4. Configuration de Squid en mode transparent.
-
-Éditez le fichier de configuration :
+3. Créer l'arborescence DB pour SquidGuard et appliquer les droits utilisateur correctement :
 
 ```bash
-sudo nano /etc/squid/squid.conf
+sudo mkdir -p /var/lib/squidguard/db
+# Détecte l'utilisateur système utilisé par Squid (proxy ou squid)
+SQUID_USER=$(getent passwd proxy >/dev/null && echo proxy || echo squid)
+sudo chown -R ${SQUID_USER}:${SQUID_USER} /var/lib/squidguard
 ```
 
-Ajoutez ou modifiez les lignes suivantes :
-
-Configuration :
+Utilisation du script de récupération des bases
+- Le script `scripts/fetch_blacklists.sh` télécharge des hosts lists publiques (configurable) et les convertit en fichiers `domains` compatibles SquidGuard.
+- Exemple d'exécution (exécuter avec `sudo` sur Debian) :
 
 ```bash
-# Port d'écoute en mode transparent
+sudo bash scripts/setup_db_dirs.sh
+sudo bash scripts/fetch_blacklists.sh
+sudo bash scripts/update_and_reload.sh
+```
+
+Automatisation (cron)
+- Ajouter une tâche system cron (exemple quotidien à 04:30) :
+
+```
+30 4 * * * root /usr/bin/bash /opt/squid/scripts/fetch_blacklists.sh >> /var/log/squid/fetch_blacklists.log 2>&1
+```
+
+(Remplacez `/opt/squid/scripts/` par le chemin complet où vous avez placé les scripts.)
+
+Integration dans Squid
+- Vérifier que le binaire de squidGuard est accessible et que `squid.conf` pointe vers lui. Exemple de vérification :
+
+```bash
+grep -E "url_rewrite_program|url_rewrite_children|http_port" /etc/squid/squid.conf || true
+```
+
+- Exemple d'option (transparent interception) :
+
+```
 http_port 3128 intercept
-
-# Autoriser l'accès au réseau local (à adapter selon votre plage réseau)
-acl localnet src 192.168.1.0/24
-http_access allow localnet
-http_access deny all
-```
-Important : Remplacez 192.168.1.0/24 par votre plage réseau locale.
-
-### 5. Configuration de l’IP forwarding.
-
-Activez le routage IP :
-
-```bash
-echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
+url_rewrite_program /usr/bin/squidGuard -c /etc/squid/squidGuard.conf
+# Ajuster url_rewrite_children selon charge (ex: 5)
 ```
 
+- Exemple simple de redirection `nftables` (adapter selon votre table) :
+
 ```bash
-sudo sysctl -p
+sudo nft add table ip nat
+sudo nft add chain ip nat prerouting { type nat hook prerouting priority 0 ; }
+sudo nft add rule ip nat prerouting tcp dport 80 redirect to :3128
 ```
 
-### 6. Configuration d’iptables pour la redirection.
+Remarques légales et sécurité
+- N'interceptez pas le trafic HTTPS sans consentement et sans infrastructure de certificats appropriée.
+- Vérifiez la provenance et la licence des listes téléchargées.
 
-Redirigez le trafic HTTP entrant vers Squid :
-
-- Videz les règles existantes (facultatif).
+Installation alternative de SquidAnalyzer (si absent dans les dépôts)
+- Si `squidanalyzer` n'est pas disponible via `apt`, téléchargez le tarball officiel ou le dépôt du projet, puis installez selon la doc du projet. Généralement :
 
 ```bash
-sudo iptables -F
+wget <url-du-tarball>
+tar xvf squidanalyzer-*.tar.gz
+cd squidanalyzer-*
+sudo ./install.sh   # ou suivre les instructions du README
 ```
 
-- Redirection du port 80 vers 3128.
-  
+- Après installation, vérifiez que les scripts d'analyse peuvent lire vos logs Squid et que les chemins dans `squidanalyzer.conf` correspondent à `/var/log/squid/access.log`.
+
+Fichiers fournis
+- Voir ../configs/ pour exemples de `squid.conf`, `squidGuard.conf` et `squidanalyzer.conf`.
+
+Commandes systemd utiles
+- Activer et démarrer Squid :
+
 ```bash
-sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 3128
+sudo systemctl enable --now squid
+sudo systemctl status squid --no-pager
 ```
 
-- Autoriser le trafic NAT.
+- Recharger Squid après mise à jour de la DB SquidGuard :
 
 ```bash
-sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo systemctl reload squid
 ```
 
-- (Optionnel) sauvegarder les règles.
+Vérifications rapides après installation
+- Vérifier service : `sudo systemctl is-active squid`
+- Vérifier droits DB : `ls -ld /var/lib/squidguard /var/lib/squidguard/db`
+- Tester squidGuard manuellement : `sudo squidGuard -C all` puis `sudo systemctl reload squid`
 
-```bash
-sudo apt install iptables-persistent
-```
-```bash
-sudo netfilter-persistent save
-```
+Support
+- Si vous le souhaitez, j'adapte les fichiers [configs/*](configs/) aux plages IP de votre réseau et rends les scripts exécutables (`chmod +x`).
 
-### 7. Redémarrer Squid.
-
-```bash
-sudo systemctl restart squid
-```
-
-```bash
-sudo systemctl enable squid
-```
-
-### 8. Tester le proxy transparent.
-
-Depuis un poste client connecté à eth1, accédez à un site Web (http://example.com). Vous pouvez vérifier les journaux de Squid :
-
-```bash
-sudo tail -f /var/log/squid/access.log
-```
-
-## 🔐 Bonus : filtrage des sites Web.
-
-Ajoutez un contrôle de contenu simple :
-
-- Dans squid.conf.
-
-```bash
-acl interdits dstdomain .facebook.com .youtube.com
-http_access deny interdits
-```
-
-## 🧪 Astuce de test.
-
-Pour vérifier que le proxy fonctionne bien en mode transparent, utilisez curl depuis un client :
-
-```bash
-curl -I http://example.com
-```
-
-Vous devriez voir des logs dans /var/log/squid/access.log.
-
-## 🧹 En cas de problème
-    • Vérifiez que le trafic passe bien par l'interface eth1.
-    • Vérifiez les règles iptables avec :
-
-```bash
-sudo iptables -t nat -L -n -v
- ```
-   
-    • Consultez les logs de Squid (/var/log/squid/cache.log).
-    
 ---
 
 <div align="center">
