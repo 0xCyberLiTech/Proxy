@@ -384,40 +384,6 @@ Remplacez `/path/to/your/` par le chemin réel où vous avez placé les scripts.
 
 ---
 
-`scripts/update_and_reload.sh` (contenu) :
-
-```bash
-#!/bin/bash
-set -euo pipefail
-# Rebuild SquidGuard DB and reload squid
-sudo squidGuard -C all || { echo "squidGuard -C all failed"; exit 1; }
-sudo systemctl reload squid || sudo service squid reload || true
-echo "update_and_reload: done"
-```
-
-`scripts/install_squid.sh` (contenu) :
-
-```bash
-#!/bin/bash
-set -euo pipefail
-# Script d'installation minimale pour Squid, SquidGuard et dépendances utiles
-sudo apt update
-sudo apt install -y squid squidguard goaccess apache2-utils nftables wget tar bzip2
-
-# Activer et démarrer services de base
-sudo systemctl enable --now squid || true
-sudo systemctl enable --now apache2 || true
-
-# Créer arborescence DB si nécessaire
-sudo mkdir -p /var/lib/squidguard/db
-SQUID_USER=$(getent passwd proxy >/dev/null && echo proxy || echo squid)
-sudo chown -R ${SQUID_USER}:${SQUID_USER} /var/lib/squidguard || true
-
-echo "install_squid: terminé. Vérifiez /etc/squid/squid.conf et /etc/squid/squidGuard.conf"
-```
-
----
-
 <div align="center">
   <a href="https://github.com/0xCyberLiTech" target="_blank" rel="noopener">
     <img src="https://skillicons.dev/icons?i=linux,debian,bash,docker,nginx,git,vim,python,markdown" alt="Skills" width="440">
