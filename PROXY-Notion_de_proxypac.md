@@ -83,15 +83,17 @@ Si `PROXY` → requête envoyée à Squid (proxy explicite)
 
 ASCII rapide :
 
+```text
 Client
   |
-  +-- DNS: wpad.example.com -> 192.0.2.10 (web)
+  +-- WPAD discovery (DNS/DHCP) -> wpad.example.com (192.0.2.10)
   |
-  +-- GET /wpad.dat --> Apache
+  +-- HTTP GET /wpad.dat --> Apache (serve wpad.dat)
   |
-  +-- Evaluate PAC -> use PROXY 192.0.2.20:3128
+  +-- Browser evaluates PAC -> returns "PROXY 192.0.2.20:3128" or "DIRECT"
   |
-  +-- Browser -> Squid
+  +-- If PROXY: Browser sends request to Squid (192.0.2.20:3128)
+```
 
 ## Exemple minimal de fichier PAC (wpad.dat)
 
