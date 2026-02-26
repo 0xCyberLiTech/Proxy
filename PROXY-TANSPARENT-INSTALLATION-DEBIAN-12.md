@@ -369,6 +369,10 @@ sudo chmod +x scripts/*.sh
 - Exécution (ordre recommandé) :
 
 ```bash
+sudo cd /usr/local/bin/
+```
+
+```bash
 sudo bash install_squid.sh
 sudo bash setup_db_dirs.sh
 sudo bash fetch_blacklists.sh
@@ -377,7 +381,7 @@ sudo bash fetch_blacklists.sh
 - Pour automatiser via cron (exemple quotidien 04:30) :
 
 ```
-30 4 * * * root /usr/bin/bash /path/to/your/docs/scripts/fetch_blacklists.sh >> /var/log/squid/fetch_blacklists.log 2>&1
+30 4 * * * root /usr/bin/bash /usr/bin/local/scripts-squid/fetch_blacklists.sh >> /var/log/squid/fetch_blacklists.log 2>&1
 ```
 
 Remplacez `/path/to/your/` par le chemin réel où vous avez placé les scripts.
