@@ -88,18 +88,18 @@ sudo apt upgrade -y
 2. Vérifier la disponibilité des paquets et installer :
 
 
-Avant d'installer, vérifiez que les paquets sont présents dans les dépôts :
+Avant d'installer, vous pouvez vérifier la disponibilité des paquets :
 
 ```bash
 apt-cache policy squid squidguard goaccess || true
 ```
 
-Si `goaccess` n'est pas disponible ou si vous voulez une version plus récente, installez‑le depuis le paquet du projet ou compilation depuis la source (voir section "Installation et utilisation de GoAccess").
+Sur Debian 13 (Trixie) `squid`, `squidguard` et `goaccess` sont disponibles dans les dépôts officiels ; l'installation standard via `apt` suffit normalement. Si vous avez besoin d'une version plus récente de `goaccess`, la compilation depuis la source reste une option (voir section "Installation et utilisation de GoAccess").
 
-Installer les paquets disponibles :
+Installer les paquets requis (commande recommandée) :
 
 ```bash
-sudo apt install -y squid squidguard apache2-utils nftables wget tar bzip2
+sudo apt install -y squid squidguard goaccess apache2 apache2-utils nftables wget tar bzip2
 ```
 
 3. Créer l'arborescence DB pour SquidGuard et appliquer les droits utilisateur correctement :
@@ -363,25 +363,21 @@ Usage rapide des scripts
 - Rendre exécutables :
 
 ```bash
-sudo chmod +x scripts/*.sh
+sudo chmod +x docs/scripts/*.sh
 ```
 
 - Exécution (ordre recommandé) :
 
 ```bash
-sudo cd /usr/local/bin/
-```
-
-```bash
-sudo bash install_squid.sh
-sudo bash setup_db_dirs.sh
-sudo bash fetch_blacklists.sh
+sudo bash docs/scripts/install_squid.sh
+sudo bash docs/scripts/setup_db_dirs.sh
+sudo bash docs/scripts/fetch_blacklists.sh
 ```
 
 - Pour automatiser via cron (exemple quotidien 04:30) :
 
 ```
-30 4 * * * root /usr/bin/bash /usr/bin/local/scripts-squid/fetch_blacklists.sh >> /var/log/squid/fetch_blacklists.log 2>&1
+30 4 * * * root /usr/bin/bash /path/to/your/docs/scripts/fetch_blacklists.sh >> /var/log/squid/fetch_blacklists.log 2>&1
 ```
 
 Remplacez `/path/to/your/` par le chemin réel où vous avez placé les scripts.
