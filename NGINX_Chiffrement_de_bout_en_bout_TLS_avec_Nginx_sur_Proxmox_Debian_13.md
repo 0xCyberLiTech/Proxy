@@ -62,7 +62,259 @@ Le contenu est structuré, accessible et optimisé SEO pour répondre aux besoin
 
 ---
 
+# Chiffrement de bout en bout (TLS) avec Nginx sur Proxmox (Debian 13)
 
+But : créer un guide autonome pour mettre en place un chiffrement TLS de bout en bout pour deux sites hébergés sur deux VM backend (`site-01`, `site-02`) derrière un reverse-proxy `proxy`. Toutes les VMs sous Debian 13.
+
+Résumé réseau / DNS
+
+- VMs : `proxy`, `site-01`, `site-02`.
+- IP privées (ex.) : `10.10.10.11` (site-01), `10.10.10.12` (site-02).
+- Domaines publics pointant vers le reverse-proxy : `site-01.example.com`, `site-02.example.com`.
+
+Scope
+
+- TLS client → proxy : certificats publics gérés par Certbot / Let's Encrypt sur `proxy`.
+- TLS proxy → backend : deux options couvertes :
+  - Option A : certificats Let's Encrypt sur chaque backend (si backends ont nom public ou DNS challenge possible).
+  - Option B (recommandée pour backends internes) : CA interne + certificats signés pour les backends ; la CA est installée sur `proxy` pour vérification.
+
+Prérequis
+
+- Accès `sudo` sur `proxy`, `site-01`, `site-02`.
+- DNS publics configurés pour `site-01.example.com` et `site-02.example.com` pointant vers l'IP publique du `proxy` (pour Option A). Pour Option B, pas besoin d'exposition publique des backends.
+- Ports réseau : 80/443 publics sur `proxy`; 443 inter-VM ou accessible depuis `proxy` vers backends.
+
+Vue d'ensemble des étapes
+
+1. Installer les paquets nécessaires sur toutes les VMs.
+2. Choisir Option A ou B pour les certificats backend.
+3A. (Option A) Obtenir et installer Let's Encrypt sur chaque backend.
+3B. (Option B) Créer une CA interne, signer les certificats backend et distribuer la CA au `proxy`.
+4. Configurer Nginx HTTPS sur chaque backend.
+5. Configurer Nginx sur `proxy` pour terminer TLS côté client et pour faire `proxy_pass https://<IP-backend>:443` en vérifiant le certificat backend.
+6. Ouvrir ports / config pare-feu et tester.
+
+1) Installation de base (toutes les VMs)
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y nginx ufw openssl curl
+```
+
+2) Choix de la méthode de certificats
+
+- Option A — pratique si chaque backend possède un domaine public ou si un challenge DNS est possible.
+- Option B — recommandée pour backends uniquement accessibles en interne : créez une CA interne et signez les certificats des backends.
+
+3A) Option A — Let's Encrypt sur les backends
+
+- Sur `site-01` (répétez pour `site-02`) :
+
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d site-01.example.com
+```
+
+Certbot configurera Nginx et installera les certificats sous `/etc/letsencrypt/live/site-01.example.com/`.
+
+Remarque : pour valider, le domaine doit pointer vers l'IP publique de la VM ou utiliser un challenge DNS.
+
+3B) Option B — CA interne et certificats pour les backends (recommandé si backends internes)
+
+Sur une machine dédiée CA (peut être `proxy` ou une machine admin sécurisée) :
+
+```bash
+mkdir -p ~/myCA && cd ~/myCA
+openssl genpkey -algorithm RSA -out ca.key -pkeyopt rsa_keygen_bits:4096
+openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt -subj "/CN=My Internal CA"
+```
+
+Pour chaque backend (ex. `site-01`) :
+
+```bash
+# Générer clé et CSR
+openssl genpkey -algorithm RSA -out site01.key -pkeyopt rsa_keygen_bits:2048
+openssl req -new -key site01.key -out site01.csr -subj "/CN=site-01.example.com"
+
+# Fichier SAN (important)
+cat > san.cnf <<EOF
+subjectAltName = DNS:site-01.example.com,IP:10.10.10.11
+EOF
+
+# Signer la CSR avec la CA
+openssl x509 -req -in site01.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out site01.crt -days 825 -sha256 -extfile san.cnf
+```
+
+Copiez `site01.crt` et `site01.key` vers `/etc/ssl/certs/` et `/etc/ssl/private/` sur `site-01` (permissions root). Copiez `ca.crt` vers `proxy` (voir section configuration proxy).
+
+4) Configuration Nginx HTTPS sur les backends
+
+Exemple de fichier `/etc/nginx/sites-available/site-01` (backend `site-01`):
+
+```nginx
+server {
+    listen 80;
+    server_name site-01.example.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name site-01.example.com;
+
+    ssl_certificate /etc/ssl/certs/site01.crt;
+    ssl_certificate_key /etc/ssl/private/site01.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        proxy_pass http://localhost:8080; # ou socket unix
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+Activer le site et recharger Nginx :
+
+```bash
+sudo ln -s /etc/nginx/sites-available/site-01 /etc/nginx/sites-enabled/site-01
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+5) Configuration du reverse-proxy `proxy`
+
+Sur `proxy`, installer Certbot pour gérer les certificats clients → `proxy` :
+
+```bash
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d site-01.example.com -d site-02.example.com
+```
+
+Si vous utilisez Option B (CA interne), copiez `ca.crt` sur `proxy` et placez-le en lieu sûr :
+
+```bash
+sudo mkdir -p /etc/ssl/private/internalCA
+sudo mv ca.crt /etc/ssl/private/internalCA/ca.crt
+sudo chmod 644 /etc/ssl/private/internalCA/ca.crt
+```
+
+Exemple de configuration Nginx sur `proxy` pour `site-01` (`/etc/nginx/sites-available/site-01`) :
+
+```nginx
+server {
+    listen 80;
+    server_name site-01.example.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name site-01.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/site-01.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/site-01.example.com/privkey.pem;
+
+    location / {
+        proxy_pass https://10.10.10.11:443;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_ssl_server_name on;               # envoie SNI
+        proxy_ssl_protocols TLSv1.2 TLSv1.3;
+
+        # Pour Option B (CA interne) : vérifier le certificat backend
+        proxy_ssl_trusted_certificate /etc/ssl/private/internalCA/ca.crt;
+        proxy_ssl_verify on;
+        proxy_ssl_verify_depth 2;
+    }
+}
+```
+
+Notes importantes :
+
+- `proxy_ssl_trusted_certificate` doit contenir la CA qui a signé le certificat backend (Option B).
+- `proxy_ssl_server_name on;` permet d'envoyer SNI au backend si nécessaire.
+- Assurez-vous que le CN/SAN du certificat backend correspond au `server_name` attendu (ou inclut l'IP si vous vérifiez par IP/SAN).
+
+6) Pare-feu et ouverture de ports
+
+Sur `proxy` (public) :
+
+```bash
+sudo ufw allow OpenSSH
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
+```
+
+Sur les backends (`site-01`, `site-02`) (autoriser uniquement depuis le réseau interne / proxy) :
+
+```bash
+sudo ufw allow from 10.10.10.0/24 to any port 443 proto tcp
+sudo ufw allow 80/tcp  # optionnel
+sudo ufw enable
+```
+
+7) Tests
+
+- Depuis l'extérieur (client) :
+
+```bash
+curl -I https://site-01.example.com
+```
+
+- Depuis `proxy`, tester la connexion TLS vers le backend (Option B : préciser `-CAfile`):
+
+```bash
+openssl s_client -connect 10.10.10.11:443 -servername site-01.example.com -CAfile /etc/ssl/private/internalCA/ca.crt
+```
+
+Recherchez `Verify return code: 0 (ok)` ou `verify return:1` selon la sortie (OpenSSL varie). Si la vérification est OK, la chaîne est valide.
+
+8) Renouvellement
+
+- Option A (Let's Encrypt) : Certbot installe un timer systemd. Tester :
+
+```bash
+sudo certbot renew --dry-run
+```
+
+- Option B (CA interne) : gérez vous‑même les durées ; renouvelez/sign ez les CSR et redéployez les fichiers sur les backends.
+
+9) Bonnes pratiques
+
+- Inclure les SAN corrects (DNS et IP interne si nécessaire) dans les certificats backend.
+- Protéger la clé de la CA interne ; limiter l'accès à la machine CA.
+- Surveiller l'expiration des certificats et automatiser la distribution si possible.
+- Ne pas accepter des certificats non vérifiés côté `proxy` (éviter `proxy_ssl_verify off` en production).
+
+Annexes — commandes utiles
+
+- Copier config depuis poste local vers `proxy` (ex. PowerShell/OpenSSH) :
+
+```bash
+scp C:/Users/me/site-01.conf user@proxy:/tmp/site-01.conf
+ssh user@proxy 'sudo mv /tmp/site-01.conf /etc/nginx/sites-available/site-01 && sudo ln -s /etc/nginx/sites-available/site-01 /etc/nginx/sites-enabled/site-01 && sudo nginx -t && sudo systemctl reload nginx'
+```
+
+- Vérifier l'état Nginx : `sudo systemctl status nginx`
+- Visualiser logs : `sudo tail -f /var/log/nginx/error.log`
+
+Dépannage rapide
+
+- Erreur de vérification TLS côté `proxy` : vérifier que le certificat backend contient le SAN attendu et que `proxy` a bien la CA racine (Option B).
+- Si Certbot échoue : vérifier que les enregistrements DNS sont corrects et que les ports 80/443 sont accessibles pour la validation.
+
+Fin.
 
 ---
 
