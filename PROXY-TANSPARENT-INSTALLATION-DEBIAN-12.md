@@ -363,15 +363,15 @@ Usage rapide des scripts
 - Rendre exécutables :
 
 ```bash
-sudo chmod +x docs/scripts/*.sh
+sudo chmod +x scripts/*.sh
 ```
 
 - Exécution (ordre recommandé) :
 
 ```bash
-sudo bash docs/scripts/install_squid.sh
-sudo bash docs/scripts/setup_db_dirs.sh
-sudo bash docs/scripts/fetch_blacklists.sh
+sudo bash install_squid.sh
+sudo bash setup_db_dirs.sh
+sudo bash fetch_blacklists.sh
 ```
 
 - Pour automatiser via cron (exemple quotidien 04:30) :
